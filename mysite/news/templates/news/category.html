@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% block title %}
+    {{ category.title }} :: {{ block.super }}
+{% endblock %}
 {% block sidebar %}
     {% include 'inc/_sidebar.html' %}
 {% endblock %}
@@ -6,7 +9,7 @@
     {% for new in news %}
         <div class="card text-center mb-3">
             <div class="card-header">
-                <h5>Категория: <a href="{% url 'category'  new.category.pk %}">{{ new.category.title }}</a></h5>
+                <h5>Категория: {{ new.category.title }}</h5>
             </div>
             <div class="card-body">
                 <h5 class="card-title">#{{ new.pk }} {{ new.title }}</h5>
