@@ -18,8 +18,8 @@
                         <img src="{{ new.photo.url }}" alt="" width="300px">
                     {% endif %}
                 </div>
-                <p class="card-text">{{ new.content }}</p>
-                <a href="#" class="btn btn-primary">просмотреть</a>
+                <p class="card-text">{{ new.content|safe|linebreaks|truncatewords:30 }}</p>
+                <a href="{{ new.get_absolute_url }}" class="btn btn-primary">просмотреть</a>
             </div>
             <div class="card-footer text-muted">
                 Дата публикации: {{ new.created_at |  date:'d-m-Y H:i' }}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ news_item.title }} :: {{ block.super }}
+{% endblock %}
+{% block sidebar %}
+    {% include 'inc/_sidebar.html' %}
+{% endblock %}
+{% block content %}
+        <div class="card text-center mb-3">
+            <div class="card-header">
+                <h5>Категория: <a href="{{ news_item.category.get_absolute_url }}"
+                >{{ news_item.category.title }}</a></h5>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">#{{ news_item.pk }} {{ news_item.title }}</h5>
+                <div class="media">
+                    {% if news_item.photo %}
+                        <img src="{{ news_item.photo.url }}" alt="" width="300px">
+                    {% endif %}
+                </div>
+                <p class="card-text">{{ news_item.content }}</p>
+            </div>
+            <div class="card-footer text-muted">
+                Дата публикации: {{ news_item.created_at |  date:'d-m-Y H:i' }}
+            </div>
+        </div>
+{% endblock %}

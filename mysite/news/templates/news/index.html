@@ -6,7 +6,8 @@
     {% for new in news %}
         <div class="card text-center mb-3">
             <div class="card-header">
-                <h5>Категория: <a href="{% url 'category'  new.category.pk %}">{{ new.category.title }}</a></h5>
+                <h5>Категория: <a href="{{ new.category.get_absolute_url }}"
+                >{{ new.category.title }}</a></h5>
             </div>
             <div class="card-body">
                 <h5 class="card-title">#{{ new.pk }} {{ new.title }}</h5>
@@ -15,8 +16,11 @@
                         <img src="{{ new.photo.url }}" alt="" width="300px">
                     {% endif %}
                 </div>
-                <p class="card-text">{{ new.content }}</p>
-                <a href="#" class="btn btn-primary">просмотреть</a>
+                <p class="card-text">{{ new.content|safe|linebreaks|truncatewords:30 }}</p>
+                {% if new.file %}
+                    <p><a href="{{ new.file.url }}">{{ new.file}}</a></p>
+                {% endif %}
+                <a href="{{ new.get_absolute_url }}" class="btn btn-primary">просмотреть</a>
             </div>
             <div class="card-footer text-muted">
                 Дата публикации: {{ new.created_at |  date:'d-m-Y H:i' }}
